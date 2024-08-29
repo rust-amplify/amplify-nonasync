@@ -1,0 +1,17 @@
+[package]
+name = "nonasync"
+version = "0.1.0"
+description = "Amplifying Rust language capabilities: multiple generic trait implementations, type wrappers, derive macros"
+authors = [
+    "Dr. Maxim Orlovsky <orlovsky@ubideco.org>",
+]
+keywords = ["generics", "core", "wrap", "patterns"]
+categories = ["data-structures", "rust-patterns"]
+repository = "https://github.com/rust-amplify/rust-amplify"
+homepage = "https://github.com/rust-amplify"
+license = "Apache-2.0"
+readme = "README.md"
+edition = "2021"
+rust-version = "1.75.0" # Due to the use of `impl` in trait return types
+
+[dependencies]
