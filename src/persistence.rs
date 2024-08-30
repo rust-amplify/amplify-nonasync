@@ -1,6 +1,10 @@
 use std::error::Error;
 use std::fmt::Debug;
 
+pub trait CloneNoPersistence: Sized {
+    fn clone_no_persistence(&self) -> Self;
+}
+
 #[derive(Debug, Display, Error)]
 #[display(inner)]
 pub struct PersistenceError(pub Box<dyn Error + Send>);
