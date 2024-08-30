@@ -58,10 +58,10 @@ pub trait Persisting: Sized {
         if let Some(p) = self.persistence_mut() {
             p.dirty = true;
         }
+        #[cfg(feature = "log")]
         if let Some(p) = self.persistence() {
             if p.autosave {
                 if let Err(e) = p.provider.store(self) {
-                    #[cfg(feature = "log")]
                     log::error!(
                         "Unable to autosave a dirty object on Persisting::mark_dirty call. \
                          Details: {e}"
@@ -74,8 +74,8 @@ pub trait Persisting: Sized {
     fn is_autosave(&self) -> bool { self.persistence().map(|p| p.autosave).unwrap_or_default() }
 
     fn set_autosave(&mut self) {
+        #[cfg(feature = "log")]
         if let Err(e) = self.store() {
-            #[cfg(feature = "log")]
             log::error!(
                 "Unable to autosave a dirty object on Persisting::set_autosave call. Details: {e}"
             );
