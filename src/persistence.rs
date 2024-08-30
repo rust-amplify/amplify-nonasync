@@ -9,7 +9,7 @@ impl PersistenceError {
     pub fn with<E: Error + Send + 'static>(e: E) -> Self { Self(Box::new(e)) }
 }
 
-pub trait PersistenceProvider<T>: Send + Debug {
+pub trait PersistenceProvider<T>: Send + Sync + Debug {
     fn load(&self) -> Result<T, PersistenceError>;
     fn store(&self, object: &T) -> Result<(), PersistenceError>;
 }
