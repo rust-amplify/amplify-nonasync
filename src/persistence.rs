@@ -31,12 +31,11 @@ impl<T: Persisting> Persistence<T> {
         autosave: bool,
     ) -> Result<T, PersistenceError> {
         let mut obj: T = provider.load()?;
-        let mut me = Self {
+        obj.as_mut_persistence().replace(Self {
             dirty: false,
             autosave,
             provider: Box::new(provider),
-        };
-        obj.persistence_mut().replace(&mut me);
+        });
         Ok(obj)
     }
 }
@@ -53,6 +52,8 @@ pub trait Persisting: Sized {
     fn persistence(&self) -> Option<&Persistence<Self>>;
 
     fn persistence_mut(&mut self) -> Option<&mut Persistence<Self>>;
+
+    fn as_mut_persistence(&mut self) -> &mut Option<Persistence<Self>>;
 
     fn is_persisted(&self) -> bool { self.persistence().is_some() }
 
@@ -93,13 +94,12 @@ pub trait Persisting: Sized {
         autosave: bool,
     ) -> Result<bool, PersistenceError> {
         let was_persisted = self.is_persisted();
-        let mut me = Persistence {
+        self.mark_dirty();
+        self.as_mut_persistence().replace(Persistence {
             dirty: false,
             autosave,
             provider: Box::new(provider),
-        };
-        self.persistence_mut().replace(&mut me);
-        self.mark_dirty();
+        });
         Ok(was_persisted)
     }
 
