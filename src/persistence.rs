@@ -100,12 +100,12 @@ pub trait Persisting: Sized {
         autosave: bool,
     ) -> Result<bool, PersistenceError> {
         let was_persisted = self.is_persisted();
-        self.mark_dirty();
         self.as_mut_persistence().replace(Persistence {
-            dirty: false,
+            dirty: true,
             autosave,
             provider: Box::new(provider),
         });
+        self.store()?;
         Ok(was_persisted)
     }
 
