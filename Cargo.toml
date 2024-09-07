@@ -1,6 +1,6 @@
 [package]
 name = "nonasync"
-version = "0.1.1"
+version = "0.1.2"
 description = "A set of utilities useful for building a non-blocking non-async APIs"
 authors = [
     "Dr. Maxim Orlovsky <orlovsky@ubideco.org>",
