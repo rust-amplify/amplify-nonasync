@@ -57,7 +57,7 @@ pub trait Persisting: Sized {
 
     fn is_persisted(&self) -> bool { self.persistence().is_some() }
 
-    fn is_dirty(&self) -> bool { self.persistence().map(|p| p.autosave).unwrap_or(true) }
+    fn is_dirty(&self) -> bool { self.persistence().map(|p| p.dirty).unwrap_or(true) }
 
     fn mark_dirty(&mut self) {
         if let Some(p) = self.persistence_mut() {
