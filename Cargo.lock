@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "amplify"
-version = "4.7.0"
+version = "4.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7147b742325842988dd6c793d55f58df3ae36bccf7d9b6e07db10ab035be343d"
+checksum = "448cf0c3afc71439b5f837aac5399a1ef2b223f5f38324dbfb4343deec3b80cc"
 dependencies = [
  "amplify_derive",
  "amplify_num",
@@ -72,7 +72,7 @@ checksum = "a7a70ba024b9dc04c27ea2f0c0548feb474ec5c54bba33a7f72f873a39d07b24"
 
 [[package]]
 name = "nonasync"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "amplify",
  "log",
